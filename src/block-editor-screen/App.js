@@ -2,7 +2,6 @@
  * WordPress dependencies
  */
 const { __ } = window.wp.i18n;
-const { dispatch } = window.wp.data;
 const { createElement, Fragment } = window.wp.element;
 const { applyFilters } = window.wp.hooks;
 
@@ -12,17 +11,6 @@ const { applyFilters } = window.wp.hooks;
 import TabPanel from './components/TabPanel';
 import ContentTab from './tabs/ContentTab';
 import ImageTab from './tabs/ImageTab';
-
-/**
- * @description Tab on select
- *
- * @param {string} tabName Tab name.
- */
-const TabonSelect = ( tabName ) => {
-    if ( 'social' === tabName ) {
-        dispatch( 'rank-math' ).toggleSnippetEditor( true )
-    }
-}
 
 const getTabs = () => {
     const tabs = [
@@ -60,7 +48,6 @@ const App = () => {
         className="mayawp-tabs"
         activeClass="is-active"
         tabs={ getTabs() }
-        onSelect={ TabonSelect }
     >
         { ( tab ) => (
             <div className={ 'mayawp-tab-content-' + tab.name }>
