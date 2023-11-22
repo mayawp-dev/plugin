@@ -45,12 +45,12 @@ const getTabs = () => {
 
 const App = () => {
     return <TabPanel
-        className="mayawp-tabs"
+        className="mayawp-app-tabs"
         activeClass="is-active"
         tabs={ getTabs() }
     >
         { ( tab ) => (
-            <div className={ 'mayawp-tab-content-' + tab.name }>
+            <div className={ 'mayawp-app-tab-content-' + tab.name }>
                 { createElement( tab.view ) }
             </div>
         ) }

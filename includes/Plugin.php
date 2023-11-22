@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use MayaWP\Admin\RegisterBlockEditorScreen;
+use MayaWP\API\LocalAPI;
 use MayaWP\Core\Options;
 use MayaWP\API\OptionsAPI;
 use MayaWP\Blocks\RegisterBlocks;
@@ -58,6 +59,7 @@ class Plugin {
 
 		// Register APIs.
 		$this->options_api_manager = new OptionsAPI();
+		new LocalAPI();
 
 		// Register Blocks.
 		$this->blocks_manager = new RegisterBlocks();

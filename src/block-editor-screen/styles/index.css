@@ -33,3 +33,29 @@
 .edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI']:focus:not(:disabled) {
     box-shadow: none;
 }
+
+
+.mayawp-app-tabs > .components-tab-panel__tabs {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background: #f8f9fa;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    padding: 0 1rem
+}
+
+.mayawp-app-tabs > .components-tab-panel__tabs button.is-active:after {
+    visibility: visible;
+    width: 100%;
+    height: 3px;
+    content: '';
+    background: #069de3;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    position: absolute;
+    bottom: -1px;
+    left: 0
+}
