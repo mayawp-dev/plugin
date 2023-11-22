@@ -8,6 +8,9 @@ const $ = window.jQuery;
  */
 import BlockEditorScreen from "./BlockEditorScreen";
 
+import './styles/index.css';
+
+
 /**
  * Initial render function.
  */

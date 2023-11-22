@@ -1,19 +1,23 @@
 /**
- * External Dependencies.
+ * WordPress Dependencies.
  */
 const { registerPlugin } = window.wp.plugins;
-const { editPost: {
-    PluginSidebar,
-    PluginSidebarMoreMenuItem,
-    PluginPostPublishPanel,
-}, element: {
-    Fragment
-}, i18n } = window.wp;
+const { PluginSidebar,
+    PluginSidebarMoreMenuItem } = window.wp.editPost;
+const { Fragment } = window.wp.element;
+const { doAction } = window.wp.hooks;
+const i18n = window.wp.i18n;
 
-// Temporary Hack.
+
+/**
+ * Internal Dependencies.
+ */
+import App from './App';
+
+// @TODO: Add an actual logo.
 const AppIcon = () => {
     return (
-        <div className="mayawp-test">
+        <div className="mwp-app-icon">
             <p>MayaWP AI</p>
         </div>
     )
@@ -21,28 +25,10 @@ const AppIcon = () => {
 
 export default class BlockEditorScreen {
     setup() {
-        // getStore()
-        // this.registerSlots = this.registerSlots.bind( this )
-        // addAction( 'rank_math_loaded', 'rank-math', this.registerSlots, 0 )
+        doAction( 'mayawp_app_loaded' );
 
-        this.registerSidebar()
-        // this.registerPostPublish()
-        // this.registerPrimaryTermSelector()
+        this.registerSidebar();
     }
-
-    /**
-     * Register slots.
-     */
-    // registerSlots() {
-    //     this.RankMathAfterEditor = RankMathAfterEditor
-    //     this.RankMathAfterFocusKeyword = RankMathAfterFocusKeyword
-    //     this.RankMathAdvancedTab = RankMathAdvancedTab
-    //     this.slots = {
-    //         AfterEditor: RankMathAfterEditor,
-    //         AfterFocusKeyword: RankMathAfterFocusKeyword,
-    //         AdvancedTab: RankMathAdvancedTab,
-    //     }
-    // }
 
     /**
      * Register plugin sidebar into gutenberg editor.
@@ -61,11 +47,7 @@ export default class BlockEditorScreen {
                     title={ i18n.__( 'MayaWP AI', 'mayawp' ) }
                     className="mayawp-sidebar-panel"
                 >
-                    {
-                        /* Filter to include components from the common editor file */
-                        // applyFilters( 'rank_math_app', {} )()
-                    }
-                    <p>Hellooo</p>
+                    <App />
                 </PluginSidebar>
             </Fragment>
         )
@@ -75,42 +57,4 @@ export default class BlockEditorScreen {
             render: MayaWPSidebar,
         } )
     }
-
-    // registerPostPublish() {
-    //     const PostStatus = () => (
-    //         <PluginPostPublishPanel
-    //             initialOpen={ true }
-    //             title={ i18n.__( 'Rank Math', 'rank-math' ) }
-    //             className="rank-math-post-publish"
-    //             icon={ <Fragment /> }
-    //         >
-    //             <PostPublish />
-    //         </PluginPostPublishPanel>
-    //     )
-    //
-    //     registerPlugin( 'rank-math-post-publish', {
-    //         render: PostStatus,
-    //     } )
-    // }
-
-    // registerPrimaryTermSelector() {
-    //     addFilter(
-    //         'editor.PostTaxonomyType',
-    //         'rank-math',
-    //         ( PostTaxonomies ) => ( props ) => (
-    //             <PrimaryTermSelector
-    //                 TermComponent={ PostTaxonomies }
-    //                 { ...props }
-    //             />
-    //         )
-    //     )
-    // }
-    // updatePermalink( slug ) {
-    //     dispatch( 'core/editor' ).editPost( { slug } )
-    // }
-    //
-    // updatePermalinkSanitize( slug ) {
-    //     slug = this.assessor.getResearch( 'slugify' )( slug )
-    //     dispatch( 'core/editor' ).editPost( { slug } )
-    // }
 }

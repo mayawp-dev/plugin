@@ -36,31 +36,53 @@ class RegisterBlockEditorScreen
         $is_block_editor = self::is_block_editor();
         $prefix = MAYAWP_SLUG;
 
+        Assets::register_script(
+            $prefix . '-editor',
+            'build/block-editor-screen/index.js',
+            MAYAWP_ROOT_FILE,
+            array(
+                'in_footer'  => true,
+                'textdomain' => 'mayawp',
+                'dependencies' => [
+                    'clipboard',
+                    'wp-autop',
+                    'wp-blocks',
+                    'wp-components',
+                    'wp-editor',
+                    'wp-edit-post',
+                    'wp-element',
+                    'wp-i18n',
+                    'wp-plugins',
+                    'wp-wordcount',
+                    'lodash'
+                ],
+            )
+        );
+
+        Assets::register_script(
+            $prefix . '-editor',
+            'build/block-editor-screen/index.js',
+            MAYAWP_ROOT_FILE,
+            array(
+                'in_footer'  => true,
+                'textdomain' => 'mayawp',
+                'dependencies' => [
+                    'clipboard',
+                    'wp-autop',
+                    'wp-blocks',
+                    'wp-components',
+                    'wp-editor',
+                    'wp-edit-post',
+                    'wp-element',
+                    'wp-i18n',
+                    'wp-plugins',
+                    'wp-wordcount',
+                ],
+            )
+        );
+
         // Block editor scripts.
         if ( $is_block_editor ) {
-            Assets::register_script(
-                $prefix . '-editor',
-                'build/block-editor-screen/index.js',
-                MAYAWP_ROOT_FILE,
-                array(
-                    'in_footer'  => true,
-                    'textdomain' => 'mayawp',
-                    'dependencies' => [
-                        'clipboard',
-                        'wp-autop',
-                        'wp-blocks',
-                        'wp-components',
-                        'wp-editor',
-                        'wp-edit-post',
-                        'wp-element',
-                        'wp-i18n',
-                        'wp-plugins',
-                        'wp-wordcount',
-                    ],
-                )
-            );
-
-
             // Enqueue app script.
             Assets::enqueue_script( $prefix . '-editor' );
         }

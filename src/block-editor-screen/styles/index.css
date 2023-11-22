@@ -1,0 +1,35 @@
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'] {
+    padding: 0;
+    background: transparent;
+    margin-right: 4px;
+}
+
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'] .mwp-app-icon {
+    padding: 10px 10px 8px;
+    color: #212F3E;
+    border: 1px solid #a6b2be;
+    border-radius: 2px;
+    background: #dadfe4
+}
+
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'] .mwp-app-icon {
+    color: #212529;
+    font-weight: 600;
+    border-color: #212529;
+    background: transparent;
+}
+
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'].is-toggled .mwp-app-icon,
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'].is-pressed .mwp-app-icon {
+    background: #212529;
+    color: #fff;
+}
+
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'] .mwp-app-icon > p {
+    margin: 0;
+    line-height: 1.3;
+}
+
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI']:focus:not(:disabled) {
+    box-shadow: none;
+}
