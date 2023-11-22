@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use MayaWP\Admin\RegisterBlockEditorScreen;
 use MayaWP\Core\Options;
 use MayaWP\API\OptionsAPI;
 use MayaWP\Blocks\RegisterBlocks;
@@ -63,6 +64,9 @@ class Plugin {
 
 		// Register Admin.
 		$this->admin_manager = new RegisterAdmin();
+
+		// Register Block Editor Screen.
+		new RegisterBlockEditorScreen();
 
 		$this->register_hooks();
 	}

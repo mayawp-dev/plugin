@@ -8,12 +8,12 @@
 namespace MayaWP\Admin;
 
 use \WP_Admin_Bar;
+use Automattic\Jetpack\Assets;
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
-use Automattic\Jetpack\Assets;
 
 /**
  * Class RegisterAdmin
