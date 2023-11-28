@@ -6,7 +6,7 @@ import apiFetch from '@wordpress/api-fetch';
 /**
  * Internal dependencies.
  */
-const { apiRoute } = window.vajraPluginState;
+const { apiRoute } = window.mayawpPluginState;
 import { addQueryArgs } from '@wordpress/url';
 export async function getOption( key = false ) {
     const queryParams = key && ! empty( key) ? { key } : {};

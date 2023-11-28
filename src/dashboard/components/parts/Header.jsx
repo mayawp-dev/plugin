@@ -8,7 +8,7 @@ import classNames from 'clsx';
 /**
  * Internal dependencies.
  */
-const pluginState = window.vajraPluginState;
+const pluginState = window.mayawpPluginState;
 
 const Header = ({ navigation, secondaryNav = null }) => {
     return (

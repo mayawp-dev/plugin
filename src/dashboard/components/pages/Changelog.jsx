@@ -7,7 +7,7 @@ import clsx from 'clsx';
 /**
  * Internal dependencies.
  */
-const { changelogURL, version } = window.vajraPluginState;
+const { changelogURL } = window.mayawpPluginState;
 import Layout from '../layout/Layout';
 
 const TypeTag = ({ type }) => {

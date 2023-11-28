@@ -37,7 +37,7 @@ class RegisterBlockEditorScreen
         $prefix = MAYAWP_SLUG;
 
         Assets::register_script(
-            $prefix . '-editor',
+            $prefix . '-block-editor-app',
             'build/block-editor-screen/index.js',
             MAYAWP_ROOT_FILE,
             array(
@@ -47,6 +47,7 @@ class RegisterBlockEditorScreen
                     'clipboard',
                     'wp-autop',
                     'wp-blocks',
+                    'wp-api-fetch',
                     'wp-components',
                     'wp-editor',
                     'wp-edit-post',
@@ -59,36 +60,43 @@ class RegisterBlockEditorScreen
             )
         );
 
-        Assets::register_script(
-            $prefix . '-editor',
-            'build/block-editor-screen/index.js',
-            MAYAWP_ROOT_FILE,
-            array(
-                'in_footer'  => true,
-                'textdomain' => 'mayawp',
-                'dependencies' => [
-                    'clipboard',
-                    'wp-autop',
-                    'wp-blocks',
-                    'wp-components',
-                    'wp-editor',
-                    'wp-edit-post',
-                    'wp-element',
-                    'wp-i18n',
-                    'wp-plugins',
-                    'wp-wordcount',
-                ],
-            )
-        );
-
         // Block editor scripts.
         if ( $is_block_editor ) {
             // Enqueue app script.
-            Assets::enqueue_script( $prefix . '-editor' );
+            Assets::enqueue_script( $prefix . '-block-editor-app' );
+
+            // Initial JS state.
+            wp_add_inline_script( $prefix . '-block-editor-app', $this->render_editor_app_initial_state(), 'before' );
         }
     }
 
+    /**
+     * Render the initial state into a JavaScript variable.
+     *
+     * @return string
+     */
+    public function render_editor_app_initial_state() {
+        return 'var mayawpAppState=JSON.parse(decodeURIComponent("' . rawurlencode( wp_json_encode( $this->initial_app_state() ) ) . '"));';
+    }
 
+    /**
+     * Get the initial state data for hydrating the React UI.
+     *
+     * @return array
+     */
+    public function initial_app_state() {
+        return array(
+            'apiRoute'     => MAYAWP_SLUG . '/v1',
+            'assetsURL'    => MAYAWP_URL . '/assets',
+            'version'      => MAYAWP_VERSION,
+        );
+    }
+
+    /**
+     * Checks if the current is screen is of Block Editor.
+     *
+     * @return bool
+     */
     public static function is_block_editor() {
         // Check WordPress version.
         if ( version_compare( get_bloginfo( 'version' ), '5.0.0', '<' ) ) {

@@ -101,7 +101,7 @@ class RegisterAdmin {
 	 * @return string
 	 */
 	public function render_dashboard_initial_state() {
-		return 'var vajraPluginState=JSON.parse(decodeURIComponent("' . rawurlencode( wp_json_encode( $this->initial_dashboard_state() ) ) . '"));';
+		return 'var mayawpPluginState=JSON.parse(decodeURIComponent("' . rawurlencode( wp_json_encode( $this->initial_dashboard_state() ) ) . '"));';
 	}
 
 	/**

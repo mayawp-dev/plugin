@@ -8,7 +8,6 @@ const { Fragment } = window.wp.element;
 const { doAction } = window.wp.hooks;
 const i18n = window.wp.i18n;
 
-
 /**
  * Internal Dependencies.
  */

@@ -50,7 +50,7 @@ const App = () => {
         tabs={ getTabs() }
     >
         { ( tab ) => (
-            <div className={ 'mayawp-app-tab-content-' + tab.name }>
+            <div className={ 'mayawp-app-tab-' + tab.name }>
                 { createElement( tab.view ) }
             </div>
         ) }

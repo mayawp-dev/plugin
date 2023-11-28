@@ -10,7 +10,7 @@ const { __ } = window.wp.i18n;
  */
 import Modal from './Modal';
 
-const TitleGenerator = () => {
+const ImageGenerator = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleModal = () => {
@@ -22,10 +22,10 @@ const TitleGenerator = () => {
             <ul className="mwp-app-modal-triggers">
                 <li className="mwp-app-modal-trigger-item">
                     <p className="label">
-                        { __( 'Generate Title', 'mayawp' ) }
+                        { __( 'Generate Image', 'mayawp' ) }
                     </p>
                     <p className="description">
-                        { __( 'Let AI create your post/page titles for you. Hit Generate to begin.', 'mayawp' ) }
+                        { __( 'Let AI create images for you. Hit Generate to begin.', 'mayawp' ) }
                     </p>
                     <Button
                         variant="primary"
@@ -41,4 +41,4 @@ const TitleGenerator = () => {
     )
 }
 
-export default TitleGenerator;
+export default ImageGenerator;

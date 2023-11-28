@@ -17,7 +17,6 @@
  * Text Domain:       mayawp
  * License:           GPL v2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- *
  */
 
  /*
@@ -47,6 +46,10 @@ define( 'MAYAWP_ROOT_FILE_RELATIVE_PATH', plugin_basename( __FILE__ ) );
 define( 'MAYAWP_SLUG', 'mayawp' );
 define( 'MAYAWP_FOLDER', dirname( plugin_basename( __FILE__ ) ) );
 define( 'MAYAWP_URL', plugins_url( '', __FILE__ ) );
+
+if ( ! defined( 'MAYAWP_REMOTE_API' ) ) {
+	define( 'MAYAWP_REMOTE_API', 'https://app.mayawp.com' );
+}
 
 // MayaWP Autoloader.
 $mayawp_autoloader = MAYAWP_DIR . 'vendor/autoload_packages.php';
@@ -116,4 +119,6 @@ register_deactivation_hook( __FILE__, array( '\MayaWP\Plugin', 'plugin_deactivat
 // Main plugin class.
 if ( class_exists( \MayaWP\Plugin::class ) ) {
 	new \MayaWP\Plugin();
+} else {
+    var_dump( 'hello' );
 }

@@ -1,11 +1,14 @@
 import '../styles/contentTab.css';
 
 /**
- * WordPress dependencies
+ * WordPress dependencies.
  */
 const { Fragment } = window.wp.element;
 const { PanelBody } = window.wp.components;
 
+/**
+ * Internal dependencies.
+ */
 import TitleGenerator from '../components/title-generator';
 
 const ContentTab = () => {

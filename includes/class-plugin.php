@@ -84,26 +84,6 @@ class Plugin {
 			'plugin_action_links_' . MAYAWP_FOLDER . '/mayawp.php',
 			array( $this, 'action_links' )
 		);
-
-		add_action(
-			'wp_head',
-			function() {
-				$options = Options::get_instance();
-				$key     = $options->get( 'api-key' );
-
-				// $response = wp_remote_post(
-				// 'https://mayawp.test/api/content/generate-v1',
-				// array(
-				// 'headers' => array(
-				// 'authorization' => "Bearer {$key}",
-				// ),
-				// 'sslverify' => false,
-				// )
-				// );
-				//
-				// var_dump( wp_remote_retrieve_body( $response ) );
-			}
-		);
 	}
 
 	/**
