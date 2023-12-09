@@ -25,9 +25,14 @@
 		* Change these colors to your preferred ones.
 		*/
 	   --mayawp__color-background: #edede9;
+	   --mayawp__color-brand: #5423E7;
    }
 }
 
 body {
 	background: var(--mayawp__color-background);
+}
+
+#wpbody-content #mayawp-dashboard-root {
+	font-family: Albert Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
