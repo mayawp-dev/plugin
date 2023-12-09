@@ -26,6 +26,9 @@ class RegisterAdmin {
 		// Register Admin Dashboard.
 		add_action( 'admin_menu', array( $this, 'register_admin_dashboard' ) );
 
+		// Add font resource for preconnects.
+		add_filter( 'wp_resource_hints', array( $this, 'update_resource_hints' ), 10, 2 );
+
 		// Handles Admin Bar menu setup and actions.
 		$this->setup_admin_bar_menu();
 	}
@@ -38,7 +41,7 @@ class RegisterAdmin {
 
 		$dashboard_page_suffix = add_menu_page(
 			_x( 'MayaWP Dashboard', 'Page title', 'mayawp' ),
-			_x( 'MayaWP', 'Menu title', 'mayawp' ),
+			_x( 'MayaWP AI', 'Menu title', 'mayawp' ),
 			'manage_options',
 			$primary_slug,
 			array( $this, 'plugin_dashboard_page' ),
@@ -79,13 +82,16 @@ class RegisterAdmin {
 	public function enqueue_dashboard_admin_scripts() {
 		$prefix = MAYAWP_SLUG;
 
+		wp_register_style( 'mayawp-fonts', 'https://fonts.bunny.net/css?family=albert-sans:400,500,600,700', array(), MAYAWP_VERSION );
+
 		Assets::register_script(
 			$prefix . '-dashboard',
 			'build/dashboard/index.js',
 			MAYAWP_ROOT_FILE,
 			array(
-				'in_footer'  => true,
-				'textdomain' => 'mayawp',
+				'in_footer'        => true,
+				'textdomain'       => 'mayawp',
+				'css_dependencies' => array( 'mayawp-fonts' ),
 			)
 		);
 
@@ -93,7 +99,28 @@ class RegisterAdmin {
 		Assets::enqueue_script( $prefix . '-dashboard' );
 		// Initial JS state.
 		wp_add_inline_script( $prefix . '-dashboard', $this->render_dashboard_initial_state(), 'before' );
+
+		// <link href="https://fonts.bunny.net/css?family=albert-sans:400,500,600,700" rel="stylesheet" />
 	}
+
+	/**
+	 * Add preconnect for Bunny Fonts.
+	 *
+	 * @param array  $urls           URLs to print for resource hints.
+	 * @param string $relation_type  The relation type the URLs are printed.
+	 * @return array $urls           URLs to print for resource hints.
+	 */
+	public function update_resource_hints( $urls, $relation_type ) {
+		if ( wp_style_is( 'mayawp-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
+			$urls[] = array(
+				'href' => 'https://fonts.bunny.net',
+				'crossorigin',
+			);
+		}
+
+		return $urls;
+	}
+
 
 	/**
 	 * Render the initial state into a JavaScript variable.

@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
  */
 const { select, dispatch } = window.wp.data;
 const { useState, useEffect } = window.wp.element;
-const { Button, TextControl, Spinner } = window.wp.components;
+const { Button, TextControl, Spinner, ToggleControl } = window.wp.components;
 const { __ } = window.wp.i18n;
 
 /**
@@ -22,6 +22,7 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
     const [titleInput, setTitleInput] = useState('');
     const [choices, setChoices] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [withContent, setWithContent] = useState(false);
 
 
     const generateTitles = (data = {}, foreGenerate = false) => {
@@ -55,12 +56,18 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
     }
 
     const handleTitleGenerate = () => {
-        const content = select('core/editor').getEditedPostAttribute('content');
+        let content = '';
+
+        if ( withContent ) {
+            content = select('core/editor').getEditedPostAttribute('content');
+        }
 
         if ( !titleInput && !content ) {
             toast('Please provide an input!');
             return;
         }
+
+
 
         const data = {
             title_input: titleInput,
@@ -100,12 +107,26 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
                         disabled={isLoading}
                     />
 
-                    <Button
-                        variant="primary"
-                        onClick={handleTitleGenerate}
+                    <div
+                        className="buttons"
                     >
-                        { __( 'Generate Now', 'mayawp' ) }
-                    </Button>
+                        <div>
+                            <Button
+                                variant="primary"
+                                onClick={handleTitleGenerate}
+                            >
+                                { __( 'Generate Now', 'mayawp' ) }
+                            </Button>
+                            <p className="help-text">Min 1 credit per generation</p>
+                        </div>
+
+                        <ToggleControl
+                            label="Include Content for context"
+                            checked={withContent}
+                            onChange={ () => setWithContent(!withContent) }
+                            help="Extra 1 credit per 375 words (Max 3k words)"
+                        />
+                    </div>
                 </div>
 
                 { isLoading && <div style={{

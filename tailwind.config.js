@@ -8,12 +8,14 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['Inter', ...defaultTheme.fontFamily.sans],
-				display: ['Inter', ...defaultTheme.fontFamily.sans],
-				heading: ['Inter', ...defaultTheme.fontFamily.sans],
+				sans: ['Albert Sans', ...defaultTheme.fontFamily.sans],
+				display: ['Albert Sans', ...defaultTheme.fontFamily.sans],
+				heading: ['Albert Sans', ...defaultTheme.fontFamily.sans],
 			},
 			colors: {
 				background: 'var(--mayawp__color-background)',
+				brand: 'var(--mayawp__color-brand)',
+				"brand-static": '#5423E7',
 			}
 		},
 	},

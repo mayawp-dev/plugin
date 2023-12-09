@@ -16,9 +16,11 @@ export default function Layout({ children }) {
 
     return (
         <>
-            <div className="min-h-full">
-                <Header navigation={navigation} secondaryNav={secondaryNav}/>
-                <Content>{children}</Content>
+            <div className="min-h-screen flex flex-col justify-between">
+                <div>
+                    <Header navigation={navigation} secondaryNav={secondaryNav}/>
+                    <Content>{children}</Content>
+                </div>
                 <Footer />
             </div>
         </>

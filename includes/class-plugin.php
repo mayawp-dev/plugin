@@ -37,13 +37,6 @@ class Plugin {
 	public $options_api_manager;
 
 	/**
-	 * Blocks manager.
-	 *
-	 * @var RegisterBlocks
-	 */
-	public $blocks_manager;
-
-	/**
 	 * Admin Manager.
 	 *
 	 * @var RegisterAdmin;
@@ -60,9 +53,6 @@ class Plugin {
 		// Register APIs.
 		$this->options_api_manager = new OptionsAPI();
 		new LocalAPI();
-
-		// Register Blocks.
-		$this->blocks_manager = new RegisterBlocks();
 
 		// Register Admin.
 		$this->admin_manager = new RegisterAdmin();

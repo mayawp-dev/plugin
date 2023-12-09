@@ -8,11 +8,11 @@
  * @wordpress-plugin
  * Plugin Name:       MayaWP
  * Plugin URI:        https://mayawp.com
- * Description:       A starter WordPress plugin scaffold which comes pre-configured for block development, admin dashboard with settings and standard plugin code.
- * Version:           0.1.0-beta
+ * Description:       An AI SaaS for your WordPress site/s, so you can do all of the things you already did on WordPress in a much more automated and efficient way.
+ * Version:           0.1.0
  * Requires at least: 6.0
  * Requires PHP:      8.0
- * Author:            MayaWP
+ * Author:            MayaWP, Krishna Kant Chourasiya
  * Author URI:        https://mayawp.com
  * Text Domain:       mayawp
  * License:           GPL v2 or later
@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'MAYAWP_VERSION', '0.1.0-beta' );
+define( 'MAYAWP_VERSION', '0.1.0' );
 define( 'MAYAWP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MAYAWP_ROOT_FILE', __FILE__ );
 define( 'MAYAWP_ROOT_FILE_RELATIVE_PATH', plugin_basename( __FILE__ ) );

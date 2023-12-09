@@ -28,6 +28,7 @@ class CoreSegment extends BaseSegment {
 
 		$payload = array(
 			'text_input' => $args['text_input'] ?? '',
+			'size'		 => $args['size'] ?? '',
 		);
 
 		return $this->remote_request( $payload );

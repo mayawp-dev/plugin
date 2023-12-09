@@ -17,10 +17,10 @@ const Header = ({ navigation, secondaryNav = null }) => {
                 <>
                     <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                         <div className="flex flex-shrink-0 items-center justify-between pt-6 pb-4">
-                            <div className="flex gap-4 items-center">
+                            <div className="flex gap-3 items-center">
                                 <img
-                                    className="block h-9 w-auto"
-                                    src={pluginState.assetsURL + '/img/icon-dark.svg'}
+                                    className="block h-6 w-auto"
+                                    src={pluginState.assetsURL + '/img/icon-brand.svg'}
                                     alt="MayaWP"
                                 />
                                 <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">MayaWP</h1>

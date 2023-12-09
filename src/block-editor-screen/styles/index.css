@@ -19,9 +19,19 @@
 	background: transparent;
 }
 
+
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'] .mwp-app-icon .logo {
+	color: #5423E7;
+}
+
 .edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'].is-toggled .mwp-app-icon,
 .edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'].is-pressed .mwp-app-icon {
 	background: #212529;
+	color: #fff;
+}
+
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'].is-toggled .mwp-app-icon .logo,
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'].is-pressed .mwp-app-icon .logo {
 	color: #fff;
 }
 
@@ -33,7 +43,6 @@
 .edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI']:focus:not(:disabled) {
 	box-shadow: none;
 }
-
 
 .mayawp-app-tabs > .components-tab-panel__tabs {
 	display: -webkit-box;
@@ -117,4 +126,20 @@ div.mayawp-app-modal-container {
 .mayawp-app-tabs div[class^="mayawp-app-tab-"] .mwp-app-modal-triggers p.description {
 	opacity: 0.95;
 	margin-bottom: 10px;
+}
+
+div.mayawp-app-modal-container .buttons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+div.mayawp-app-modal-container .buttons > * {
+	margin-bottom: 0;
+}
+
+div.mayawp-app-modal-container .help-text {
+	font-size: 12px;
+	font-style: normal;
+	color: rgb(117, 117, 117);
 }
