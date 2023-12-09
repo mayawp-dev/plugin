@@ -12,7 +12,7 @@
     "build:blocks": "wp-scripts build --webpack-src-dir=src/blocks --output-path=build/blocks",
     "build:block-editor-screen": "wp-scripts build --webpack-src-dir=src/block-editor-screen --output-path=build/block-editor-screen",
     "build:dashboard": "wp-scripts build --webpack-src-dir=src/dashboard --output-path=build/dashboard",
-    "build:all": "composer install --no-dev && npm run build:blocks && npm run build:block-editor-screen && npm run build:dashboard",
+    "build:all": "composer install --no-dev && npm run build:block-editor-screen && npm run build:dashboard",
     "format": "wp-scripts format",
     "lint:css": "wp-scripts lint-style",
     "lint:js": "wp-scripts lint-js",
