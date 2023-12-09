@@ -21,9 +21,11 @@ export default function SettingsLayout({ children }) {
 
     return (
         <>
-            <div className="min-h-full">
-                <Header navigation={navigation} secondaryNav={secondaryNav} />
-                <Content className="space-y-10">{children}</Content>
+            <div className="min-h-screen flex flex-col justify-between">
+                <div>
+                    <Header navigation={navigation} secondaryNav={secondaryNav} />
+                    <Content className="space-y-10">{children}</Content>
+                </div>
                 <Footer />
             </div>
         </>
