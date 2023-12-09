@@ -63,3 +63,28 @@ export async function fetchImage( options = {}, forceGenerate = false ){
 
     return result;
 }
+
+export async function saveImage( options = {}){
+    let result = {}
+
+    try {
+        const data = {
+            ...options,
+        };
+
+        result = await apiFetch({
+            path: `/${apiRoute}/local/save_image`,
+            method: 'POST',
+            data,
+        } ).then(
+            response => response
+        );
+    } catch (error) {
+        result = {
+            success: false,
+        }
+    }
+
+    return result;
+}
+

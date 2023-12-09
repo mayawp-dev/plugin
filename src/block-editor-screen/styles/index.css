@@ -19,9 +19,19 @@
 	background: transparent;
 }
 
+
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'] .mwp-app-icon .logo {
+	color: #5423E7;
+}
+
 .edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'].is-toggled .mwp-app-icon,
 .edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'].is-pressed .mwp-app-icon {
 	background: #212529;
+	color: #fff;
+}
+
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'].is-toggled .mwp-app-icon .logo,
+.edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI'].is-pressed .mwp-app-icon .logo {
 	color: #fff;
 }
 
@@ -33,7 +43,6 @@
 .edit-post-layout:not(.show-icon-labels) .interface-pinned-items button.components-button[aria-label='MayaWP AI']:focus:not(:disabled) {
 	box-shadow: none;
 }
-
 
 .mayawp-app-tabs > .components-tab-panel__tabs {
 	display: -webkit-box;

@@ -13,7 +13,7 @@ const { __ } = window.wp.i18n;
 /**
  * Internal dependencies.
  */
-import { fetchImage } from "../../api/local";
+import { fetchImage, saveImage } from "../../api/local";
 import ModalLayout from "../layouts/ModalLayout";
 
 const GeneratorModal = ({ isOpen, toggleModal }) => {
@@ -21,18 +21,18 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
     const [state, setState] = useState({
         textInput: '',
         size: '512x512',
-        imageURL: '',
-        isLoading: false
+        imageJSON: '',
+        isLoading: false,
+        isSaving: false,
     });
 
     const generateImage = (data = {}, foreGenerate = false) => {
         setState({...state, isLoading: true});
 
         fetchImage(data, foreGenerate).then(res => {
-            console.log(res);
             if (res.success && res?.data) {
                 const data = res?.data;
-                '' !== data.url ? setState({...state, imageURL: data.url, isLoading: false}) : false;
+                '' !== data.imageJSON ? setState({...state, imageJSON: data.imageJSON, isLoading: false}) : false;
                 foreGenerate && toast.success( 'Image generated' );
             } else if ( !res.success && res?.warning ) {
 				toast.error(res.warning);
@@ -74,8 +74,28 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
         generateImage(data, true);
     }
 
-    const uploadImage = ( img ) => {
-        toast.success('Imported image to Media Gallery!');
+    const handleSaveImage = () => {
+        if ( !state.imageJSON ) {
+            toast('Please generate an image first!');
+            return;
+        }
+
+        setState({...state, isSaving: true});
+
+        const data = {
+            imageJSON: state.imageJSON,
+        }
+
+        saveImage(data).then(res => {
+            if (res.success) {
+                toast.success( 'Saved Image to Media Gallery!' );
+            } else if ( !res.success && res?.error ) {
+                toast.error(res.error);
+            } else {
+                toast.error('Oops, an error occurred!');
+            }
+            setState({...state, isSaving: false});
+        });
     }
 
     return <ModalLayout
@@ -94,7 +114,7 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
                         'mayawp'
                     )}
                     </>}
-                    disabled={state.isLoading}
+                    disabled={state.isLoading || state.isSaving}
                 />
 
                 <div style={{
@@ -107,10 +127,13 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
                         <Button
                             variant="primary"
                             onClick={handleImageGenerate}
+                            disabled={state.isLoading || state.isSaving}
                         >
                             { __( 'Generate Now', 'mayawp' ) }
                         </Button>
-                        <p className="help-text">Min 4 credits per generation</p>
+                        <p className="help-text" style={{
+                            marginBottom: '0px',
+                        }}>Min 4 credits per generation</p>
                     </div>
                     <SelectControl
                         label="Resolution"
@@ -139,11 +162,30 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
                 <p>{__( 'Generating image...', 'mayawp' )}</p>
             </div> }
 
-        {!state.isLoading && state.imageURL && <div className="generated-image" style={{
+        {!state.isLoading && state.imageJSON && <div className="generated-image" style={{
             marginTop: '30px'
 
         }}>
-            <img key="label" src={state.imageURL} style={{
+            <div style={{
+                display: 'flex',
+                gap: '20px',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+            }}>
+                <p key="label" style={{
+                    fontWeight: 600,
+                    fontSize: '18px',
+                    marginBottom: '20px',
+                }}>{__( 'Recently Generated:', 'mayawp' )}</p>
+                <Button
+                    variant="primary"
+                    onClick={handleSaveImage}
+                    disabled={state.isLoading || state.isSaving}
+                >
+                    { __( 'Save to Media Gallery', 'mayawp' ) }
+                </Button>
+            </div>
+            <img key="image" src={`data:image/png;base64,${state.imageJSON}`} style={{
                 fontWeight: 600,
                 fontSize: '18px',
                 marginBottom: '20px',

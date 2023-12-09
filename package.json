@@ -1,7 +1,7 @@
 {
   "name": "mayawp",
-  "version": "0.1.0-beta",
-  "description": "A starter WordPress plugin scaffold which comes pre-configured for block development, admin settings and standard WordPress plugin rules.",
+  "version": "0.1.0",
+  "description": "A WordPress AI SaaS to do all things WordPress in a better and efficient way.",
   "main": "build/index.js",
   "scripts": {
     "install-scripts": "composer install && npm install",

@@ -59,6 +59,7 @@ class LocalAPI {
 		$this->routes = array(
 			'get_titles' => WP_REST_Server::CREATABLE,
 			'get_image'  => WP_REST_Server::CREATABLE,
+			'save_image' => WP_REST_Server::CREATABLE,
 		);
 	}
 
@@ -199,7 +200,11 @@ class LocalAPI {
 		$force         = $request->get_param( 'forceGenerate' );
 		$data          = get_transient( $transient_key );
 
-		if ( ! $force && ! empty( $data ) ) {
+		if ( ! $force ) {
+			if ( empty( $data ) ) {
+				$data = array();
+			}
+
 			return new WP_REST_Response( $data, 200 );
 		}
 
@@ -216,9 +221,80 @@ class LocalAPI {
 		// Save for future responses if not regenerated.
 		if ( isset( $res['success'] ) && isset( $res['data'] ) && false !== $res['success'] ) {
 			// Store transient for 6 hours.
-			set_transient( $transient_key, $res, 6 * HOUR_IN_SECONDS );
+			set_transient( $transient_key, $res, 7 * DAY_IN_SECONDS );
 		}
 
 		return new WP_REST_Response( $result, 200 );
+	}
+
+	/**
+	 * Save image.
+	 *
+	 * @param WP_REST_Request $request Request object.
+	 *
+	 * @return WP_Error|WP_REST_Response
+	 */
+	public function save_image( WP_REST_Request $request ) {
+		$image_b64 = $request->get_param( 'imageJSON' ) ?? '';
+
+		if ( empty( $image_b64 ) ) {
+			return new WP_Error( 'input_error', __( 'No input image URL provided.', 'mayawp' ) );
+		}
+
+		$upload_dir  = wp_upload_dir();
+		$upload_path = str_replace( '/', DIRECTORY_SEPARATOR, $upload_dir['path'] ) . DIRECTORY_SEPARATOR;
+
+		$img             = str_replace( ' ', '+', $image_b64 );
+		$decoded         = base64_decode( $img ); // phpcs:ignore
+		$filename        = 'mayawp-ai-generated.png';
+		$file_type       = 'image/png';
+		$hashed_filename = md5( $filename . microtime() ) . '_' . $filename;
+
+		global $wp_filesystem;
+
+		if ( empty( $wp_filesystem ) ) {
+			require_once ABSPATH . '/wp-admin/includes/file.php';
+			WP_Filesystem();
+		}
+
+		// Save the image in the uploads directory.
+		$upload_file = $wp_filesystem->put_contents( $upload_path . $hashed_filename, $decoded );
+
+		if ( ! $upload_file ) {
+			return new WP_Error( 'upload_error', __( 'Failed to write into uploads.', 'mayawp' ) );
+		}
+
+		$attachment = array(
+			'post_mime_type' => $file_type,
+			'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $hashed_filename ) ),
+			'post_content'   => '',
+			'post_status'    => 'inherit',
+			'guid'           => $upload_dir['url'] . '/' . basename( $hashed_filename ),
+		);
+
+		// It is time to add our uploaded image into WordPress media library.
+		$attachment_id = wp_insert_attachment(
+			$attachment,
+			$upload_dir['path'] . '/' . $hashed_filename
+		);
+
+		if ( is_wp_error( $attachment_id ) || ! $attachment_id ) {
+			return new WP_Error( 'attachment_error', __( 'An error occurred while saving to gallery, please try again.', 'mayawp' ) );
+		}
+
+		if ( ! function_exists( 'wp_update_attachment_metadata' ) || ! function_exists( 'wp_generate_attachment_metadata' ) ) {
+			// Update metadata, regenerate image sizes.
+			require_once ABSPATH . 'wp-admin/includes/image.php';
+		}
+
+		$attach_data = wp_generate_attachment_metadata( $attachment_id, $upload_dir['path'] . '/' . $hashed_filename );
+		wp_update_attachment_metadata( $attachment_id, $attach_data );
+
+		return new WP_REST_Response(
+			array(
+				'success' => true,
+			),
+			200
+		);
 	}
 }

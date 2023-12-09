@@ -124,7 +124,7 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
                             label="Include Content for context"
                             checked={withContent}
                             onChange={ () => setWithContent(!withContent) }
-                            help="Extra 2 credits per 1k words (Max 3k words)"
+                            help="Extra 1 credit per 375 words (Max 3k words)"
                         />
                     </div>
                 </div>
