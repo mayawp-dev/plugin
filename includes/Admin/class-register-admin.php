@@ -41,7 +41,7 @@ class RegisterAdmin {
 
 		$dashboard_page_suffix = add_menu_page(
 			_x( 'MayaWP Dashboard', 'Page title', 'mayawp' ),
-			_x( 'MayaWP', 'Menu title', 'mayawp' ),
+			_x( 'MayaWP AI', 'Menu title', 'mayawp' ),
 			'manage_options',
 			$primary_slug,
 			array( $this, 'plugin_dashboard_page' ),

@@ -27,6 +27,6 @@ You can get help by reaching out to us at support@smalltowndev.com
 
 == Changelog ==
 
-= 0.1.0-beta =
+= 0.1.0 =
 * Initial release
 
