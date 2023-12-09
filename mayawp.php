@@ -6,7 +6,7 @@
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       MayaWP
+ * Plugin Name:       MayaWP AI
  * Plugin URI:        https://mayawp.com
  * Description:       An AI SaaS for your WordPress site/s, so you can do all of the things you already did on WordPress in a much more automated and efficient way.
  * Version:           0.1.0
