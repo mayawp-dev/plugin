@@ -118,3 +118,19 @@ div.mayawp-app-modal-container {
 	opacity: 0.95;
 	margin-bottom: 10px;
 }
+
+div.mayawp-app-modal-container .buttons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+div.mayawp-app-modal-container .buttons > * {
+	margin-bottom: 0;
+}
+
+div.mayawp-app-modal-container .help-text {
+	font-size: 12px;
+	font-style: normal;
+	color: rgb(117, 117, 117);
+}
