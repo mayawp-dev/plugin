@@ -195,14 +195,12 @@ class LocalAPI {
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function get_image( WP_REST_Request $request ) {
-		$options = Options::get_instance();
+		$transient_key = 'mayawp_image_generator';
+		$force         = $request->get_param( 'forceGenerate' );
+		$data          = get_transient( $transient_key );
 
-		$option_key = 'image_generator';
-		$force      = $request->get_param( 'forceGenerate' );
-
-		if ( ! $force && $options->has( $option_key ) ) {
-			$result = $options->get( $option_key );
-			return new WP_REST_Response( $result, 200 );
+		if ( ! $force && ! empty( $data ) ) {
+			return new WP_REST_Response( $data, 200 );
 		}
 
 		$payload = $this->get_request_payload( $request );
@@ -216,8 +214,9 @@ class LocalAPI {
 		$result = $res;
 
 		// Save for future responses if not regenerated.
-		if ( isset( $res['success'] ) && isset( $res['data'] ) && $res['success'] ) {
-			$options->set( $option_key, $res );
+		if ( isset( $res['success'] ) && isset( $res['data'] ) && false !== $res['success'] ) {
+			// Store transient for 6 hours.
+			set_transient( $transient_key, $res, 6 * HOUR_IN_SECONDS );
 		}
 
 		return new WP_REST_Response( $result, 200 );
