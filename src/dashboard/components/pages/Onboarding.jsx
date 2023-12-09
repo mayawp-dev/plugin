@@ -1,4 +1,5 @@
-import { CheckCircleIcon } from '@heroicons/react/20/solid'
+import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
+
 import OnboardingLayout from '../layout/OnboardingLayout';
 import { NavLink } from 'react-router-dom'
 
@@ -53,83 +54,80 @@ const Onboarding = () => {
             <div className="mb-6 text-center">
                 <NavLink
                     to="/dashboard"
-                    className="text-gray-400 hover:text-gray-800 inline-flex items-center px-1 pt-1 text-base shadow-none"
+                    className="text-gray-500 hover:text-gray-800 inline-flex items-center px-1 pt-1 text-base shadow-none"
                 >
                     Skip to Dashboard
                 </NavLink>
             </div>
-            <div className="bg-white rounded">
-                <nav aria-label="Progress" className="px-4 py-6 border-b border-b-gray-200">
-                    <ol role="list" className="space-y-4 md:flex md:space-x-8 md:space-y-0">
-                        {steps.map(( step) => (
-                            <li key={step.id} className="md:flex-1">
-                                {step.status === 'complete' ? (
-                                    <a
-                                        href={step.href}
-                                        className="group flex flex-col border-l-4 border-gray-600 py-2 pl-4 hover:border-gray-800 md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4 outline-none shadow-none"
-                                    >
-                                        <span className="text-sm font-medium">{step.name}</span>
-                                    </a>
-                                ) : step.status === 'current' ? (
-                                    <a
-                                        href={step.href}
-                                        className="flex flex-col border-l-4 border-gray-600 py-2 pl-4 md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4 outline-none shadow-none"
-                                        aria-current="step"
-                                    >
-                                        <span className="text-sm font-medium">{step.name}</span>
-                                    </a>
-                                ) : (
-                                    <a
-                                        href={step.href}
-                                        className="group flex flex-col border-l-4 border-gray-200 py-2 pl-4 hover:border-gray-300 md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4 outline-none shadow-none"
-                                    >
-                                        <span className="text-sm font-medium">{step.name}</span>
-                                    </a>
-                                )}
-                            </li>
-                        ))}
-                    </ol>
-                </nav>
-                <div className="bg-white px-4 py-24">
+            <div className="bg-white rounded-lg">
+                <div className="bg-white pt-20 pb-10 rounded-lg">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="mx-auto max-w-4xl sm:text-center">
                             <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                                Select a plan
+                                Hi there 👋
                             </p>
                         </div>
                         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 sm:text-center">
-                            Plans for all that you need and more, select a plan and get ready to take off!
+                            MayaWP is an AI SaaS and you'll need an API key to continue using this plugin, you can get a free account to try our features.
+                            <span className="block text-sm">(MayaWP is still in an Early Preview at the moment, you can stay tuned on <a href="https://twitter.com/lushkant" className="text-brand underline hover:no-underline" target="_blank">X/Twitter</a> for new features and updates.)</span>
                         </p>
-                        <div className="mt-20 flow-root">
-                            <div className="isolate -mt-16 grid max-w-sm grid-cols-1 gap-y-16 divide-y divide-gray-100 sm:mx-auto lg:-mx-8 lg:mt-0 lg:max-w-none lg:grid-cols-3 lg:divide-x lg:divide-y-0 xl:-mx-4">
-                                {tiers.map((tier) => (
-                                    <div key={tier.id} className="pt-16 lg:px-8 lg:pt-0 xl:px-14">
-                                        <h3 id={tier.id} className="text-base font-semibold leading-7 text-gray-900">
-                                            {tier.name}
-                                        </h3>
-                                        <p className="mt-6 flex items-baseline gap-x-1">
-                                            <span className="text-5xl font-bold tracking-tight text-gray-900">{tier.price.monthly}</span>
-                                            <span className="text-sm font-semibold leading-6 text-gray-600">/month</span>
-                                        </p>
-                                        <p className="mt-3 text-sm leading-6 text-gray-500">{tier.price.annually} per month if paid annually</p>
-                                        <a
-                                            href={tier.href}
-                                            aria-describedby={tier.id}
-                                            className="mt-10 block rounded-md bg-gray-700 px-3 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        >
-                                            Buy plan
-                                        </a>
-                                        <p className="mt-10 text-sm font-semibold leading-6 text-gray-900">{tier.description}</p>
-                                        <ul role="list" className="mt-6 space-y-3 text-sm leading-6 text-gray-600">
-                                            {tier.features.map((feature) => (
-                                                <li key={feature} className="flex gap-x-3">
-                                                    <CheckCircleIcon className="h-6 w-5 flex-none text-gray-600" aria-hidden="true" />
-                                                    {feature}
-                                                </li>
-                                            ))}
-                                        </ul>
+                    </div>
+
+                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                        <div className="mt-8 flex flex-col justify-center gap-8 items-center">
+                            <div>
+                                <NavLink
+                                    to="/settings"
+                                    className="rounded-lg bg-brand px-4 py-3 text-base font-semibold text-white hover:bg-brand-static/90 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                >Already have an API key?</NavLink>
+                            </div>
+                            <p className="text-xl text-gray-500 leading-8">Or follow the below super quick step to get one for free.</p>
+
+                        </div>
+                    </div>
+
+                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                        <div className="mt-8 flow-root">
+                            <div className="overflow-hidden bg-white py-10 sm:py-10">
+                                <div className="mx-auto max-w-7xl md:px-6 lg:px-8">
+                                    <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-1 lg:items-start">
+                                        <div className="text-center">
+                                            <div className="mx-auto max-w-2xl lg:max-w-lg space-y-6">
+                                                <div>
+                                                    <h2 className="text-base font-semibold leading-7 text-brand">Easy Peezy MayaWPyy, <span className="text-sm italic">alright we tried!</span></h2>
+                                                    <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Sign up for an API key</p>
+                                                </div>
+                                                <p className="text-lg leading-8 text-gray-600">
+                                                    It's really simple, you just register for an account at <a href="https://mayawp.com" target="_blank" className="font-medium text-brand underline hover:no-underline">mayawp.com</a>. That's it and you get a key, everyone gets a key, from the <span className="font-medium">API Keys</span> page. <br/> Let's go 🚀
+                                                </p>
+                                                <div>
+                                                    <a
+                                                        href="https://mayawp.com"
+                                                        target="_blank"
+                                                        className="rounded-lg bg-gray-900 px-4 py-3 text-base font-semibold text-white shadow-sm hover:bg-gray-900/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                                    >Let's get my API key</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/*<div className="sm:px-6 lg:px-0">*/}
+                                        {/*    <div className="relative isolate overflow-hidden bg-indigo-500 px-6 pt-8 sm:mx-auto sm:max-w-2xl sm:rounded-3xl sm:pl-16 sm:pr-0 sm:pt-16 lg:mx-0 lg:max-w-none">*/}
+                                        {/*        <div*/}
+                                        {/*            className="absolute -inset-y-px -left-3 -z-10 w-full origin-bottom-left skew-x-[-30deg] bg-indigo-100 opacity-20 ring-1 ring-inset ring-white"*/}
+                                        {/*            aria-hidden="true"*/}
+                                        {/*        />*/}
+                                        {/*        <div className="mx-auto max-w-2xl sm:mx-0 sm:max-w-none">*/}
+                                        {/*            <div className="w-screen overflow-hidden rounded-tl-xl bg-gray-900 ring-1 ring-white/10">*/}
+                                        {/*                <p>Add a gif here.</p>*/}
+                                        {/*            </div>*/}
+                                        {/*        </div>*/}
+                                        {/*        <div*/}
+                                        {/*            className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/10 sm:rounded-3xl"*/}
+                                        {/*            aria-hidden="true"*/}
+                                        {/*        />*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
                                     </div>
-                                ))}
+                                </div>
                             </div>
                         </div>
                     </div>
