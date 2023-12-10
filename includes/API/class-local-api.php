@@ -165,8 +165,14 @@ class LocalAPI {
 		$option_key = 'title_generator';
 		$force      = $request->get_param( 'forceGenerate' );
 
-		if ( ! $force && $options->has( $option_key ) ) {
-			$result = $options->get( $option_key );
+		if ( ! $force ) {
+			if ( $options->has( $option_key ) ) {
+				$result = $options->get( $option_key );
+			} else {
+				$result = array(
+					'success' => false,
+				);
+			}
 			return new WP_REST_Response( $result, 200 );
 		}
 

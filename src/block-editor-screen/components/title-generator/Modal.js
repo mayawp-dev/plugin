@@ -33,9 +33,12 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
                 const data = JSON.parse(res?.data);
                 data.titles.length > 0 ? setChoices(data.titles) : false;
                 foreGenerate && toast.success( 'Titles generated' );
-            } else if ( !res?.data ) {
-                toast.error('Oops! failed to generate, please try again');
+            } else if ( !res.success && res?.warning ) {
+                toast.error( res.warning );
+            } else if ( !res.success && res?.error ) {
+                toast.error(res.error);
             }
+
             setIsLoading(false);
         });
     }
@@ -66,8 +69,6 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
             toast('Please provide an input!');
             return;
         }
-
-
 
         const data = {
             title_input: titleInput,
@@ -129,7 +130,7 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
                     </div>
                 </div>
 
-                { isLoading && <div style={{
+                {isLoading && <div style={{
                     textAlign: 'center',
                     marginTop: '50px',
                 }}><Spinner
@@ -141,7 +142,7 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
                 <p>{__( 'Generating titles...', 'mayawp' )}</p>
                 </div> }
 
-                {!isLoading && Array.isArray( choices ) && <ul className="generated-titles" style={{
+                {!isLoading && Array.isArray( choices ) && choices.length > 0 && <ul className="generated-titles" style={{
                     marginTop: '30px'
                 }}>
                     <li key="label" style={{

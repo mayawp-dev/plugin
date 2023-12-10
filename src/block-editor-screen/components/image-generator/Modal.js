@@ -41,7 +41,6 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
                 toast.error(res.error);
                 setState({ ...state, isLoading: false });
             } else {
-                toast.error('Oops! failed to generate, please try again. If this continues please contact MayaWP support.');
                 setState({ ...state, isLoading: false });
             }
         });
@@ -91,7 +90,7 @@ const GeneratorModal = ({ isOpen, toggleModal }) => {
                 toast.success( 'Saved Image to Media Gallery!' );
             } else if ( !res.success && res?.error ) {
                 toast.error(res.error);
-            } else {
+            } else if (!res.success) {
                 toast.error('Oops, an error occurred!');
             }
             setState({...state, isSaving: false});
